@@ -161,6 +161,15 @@
                                 <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
                                     {{ $post->excerpt_limited }}
                                 </p>
+
+                                <div class="mt-3 pt-3 border-t border-gray-100">
+                                                <span class="text-blue-600 font-semibold text-sm group-hover:text-blue-700 transition-colors duration-300 inline-flex items-center">
+                                                    Baca Selengkapnya
+                                                    <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                                    </svg>
+                                                </span>
+                                    </div>
                                 
                             </div>
                         </div>

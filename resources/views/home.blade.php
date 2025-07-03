@@ -76,9 +76,9 @@
 
             <!-- Login Button -->
             <div class="hidden lg:flex items-center">
-                <a href="{{ route('login') }}"
+                <a href="https://wa.me/6289537980511"
                     class="login-btn bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all duration-300 whitespace-nowrap hover:scale-105 hover:shadow-lg border-2 border-orange-500 hover:border-orange-600">
-                    Login
+                    Konsultasi Gratis
                 </a>
             </div>
 
@@ -1716,7 +1716,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                                 {{ $post->excerpt_limited }}
                                             </p>
                                             
-                                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                            <div class="mt-2 pt-2 border-t border-gray-100">
                                                 <span class="text-blue-600 font-semibold text-sm group-hover:text-blue-700 transition-colors duration-300 inline-flex items-center">
                                                     Baca Selengkapnya
                                                     <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

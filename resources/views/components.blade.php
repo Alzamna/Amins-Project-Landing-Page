@@ -36,9 +36,9 @@
 
             <!-- Login Button -->
             <div class="hidden lg:flex items-center">
-                <a href="{{ route('login') }}"
+                <a href="https://wa.me/6289537980511"
                     class="login-btn bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all duration-300 whitespace-nowrap hover:scale-105 hover:shadow-lg border-2 border-orange-500 hover:border-orange-600">
-                    Login
+                    Konsultasi Gratis
                 </a>
             </div>
 
