@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->string('icon')->nullable();
-            $table->string('color')->default('#3B82F6');
             $table->text('description')->nullable();
+            $table->string('color', 7)->default('#3B82F6'); // Default blue color
+            $table->string('icon')->nullable(); // FontAwesome icon class
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);
             $table->timestamps();

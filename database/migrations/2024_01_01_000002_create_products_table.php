@@ -12,22 +12,22 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('short_description')->nullable();
-            $table->decimal('price', 12, 2);
-            $table->decimal('sale_price', 12, 2)->nullable();
-            $table->string('sku')->unique();
+            $table->decimal('price', 10, 2);
+            $table->decimal('sale_price', 10, 2)->nullable();
+            $table->string('sku')->unique()->nullable();
             $table->integer('stock_quantity')->default(0);
-            $table->boolean('manage_stock')->default(true);
             $table->enum('stock_status', ['in_stock', 'out_of_stock', 'on_backorder'])->default('in_stock');
             $table->string('image')->nullable();
-            $table->json('gallery')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_featured')->default(false);
+            $table->json('images')->nullable(); // For multiple images
+            $table->json('specifications')->nullable(); // For product specifications
             $table->boolean('is_active')->default(true);
-            $table->json('specifications')->nullable();
-            $table->decimal('weight', 8, 2)->nullable();
-            $table->string('dimensions')->nullable();
+            $table->boolean('is_featured')->default(false);
+            $table->string('meta_title', 60)->nullable();
+            $table->string('meta_description', 160)->nullable();
+            $table->decimal('weight', 8, 2)->nullable(); // in kg
+            $table->string('dimensions', 100)->nullable(); // e.g., "10x20x30 cm"
             $table->timestamps();
         });
     }

@@ -8,59 +8,72 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Get all active categories with their icons and colors
-        $categories = Category::active()->ordered()->get();
-        
-        // Get featured products that are active and in stock
-        $featured_products = Product::with('category')
+        $featured_products = Product::with('categories')
             ->active()
             ->featured()
             ->inStock()
-            ->take(8)
+            ->take(6)
             ->get();
 
-        // Get all active products for the main product grid
-        $all_products = Product::with('category')
-            ->active()
-            ->inStock()
-            ->latest()
-            ->take(12)
+        $categories = Category::active()
+            ->ordered()
+            ->withCount(['products' => function($query) {
+                $query->active();
+            }])
             ->get();
 
-        return view('shop', compact('categories', 'featured_products', 'all_products'));
-    }
-
-    public function category(Request $request, $slug)
-    {
-        $category = Category::where('slug', $slug)->active()->firstOrFail();
-        
-        $products = Product::with('category')
-            ->where('category_id', $category->id)
+        $products = Product::with('categories')
             ->active()
             ->inStock()
             ->latest()
             ->paginate(12);
 
-        return view('shop.category', compact('category', 'products'));
+        return view('shop', compact('featured_products', 'categories', 'products'));
+    }
+
+    public function category($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+        
+        $products = Product::with('categories')
+            ->whereHas('categories', function($query) use ($category) {
+                $query->where('categories.id', $category->id);
+            })
+            ->active()
+            ->inStock()
+            ->latest()
+            ->paginate(12);
+
+        $categories = Category::active()
+            ->ordered()
+            ->withCount(['products' => function($query) {
+                $query->active();
+            }])
+            ->get();
+
+        return view('shop.category', compact('category', 'products', 'categories'));
     }
 
     public function product($slug)
     {
-        $product = Product::with('category')
+        $product = Product::with('categories')
             ->where('slug', $slug)
             ->active()
             ->firstOrFail();
 
-        $related_products = Product::with('category')
-            ->where('category_id', $product->category_id)
+        // Get related products from same categories
+        $relatedProducts = Product::with('categories')
+            ->whereHas('categories', function($query) use ($product) {
+                $query->whereIn('categories.id', $product->categories->pluck('id'));
+            })
             ->where('id', '!=', $product->id)
             ->active()
             ->inStock()
             ->take(4)
             ->get();
 
-        return view('shop.product', compact('product', 'related_products'));
+        return view('shop.product', compact('product', 'relatedProducts'));
     }
 }

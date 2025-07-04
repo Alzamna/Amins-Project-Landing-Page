@@ -1,172 +1,517 @@
 @extends('admin.layouts.app')
-
 @section('title', 'Edit Product')
-@section('page-title', 'Edit Product')
-
 @section('content')
-<div class="max-w-4xl mx-auto">
-    <div class="bg-white rounded-lg shadow">
-        <div class="p-6 border-b">
-            <h2 class="text-xl font-semibold text-gray-900">Edit Product: {{ $product->name }}</h2>
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Edit Product</h1>
+                    <p class="mt-2 text-sm text-gray-600">Update product information and settings</p>
+                </div>
+                <div class="mt-4 sm:mt-0">
+                    <a href="{{ route('admin.products.index') }}" 
+                       class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Products
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <form method="POST" action="{{ route('admin.products.update', $product) }}" enctype="multipart/form-data" class="p-6 space-y-6">
+
+        <form action="{{ route('admin.products.update', $product) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Product Name -->
-                <div>
-                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Product Name *</label>
-                    <input type="text" id="name" name="name" value="{{ old('name', $product->name) }}" required
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror">
-                    @error('name')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Main Content -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Basic Information -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Basic Information</h3>
+                        </div>
+                        <div class="p-6 space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Product Name <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       id="name" 
+                                       name="name" 
+                                       value="{{ old('name', $product->name) }}" 
+                                       required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('name') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                @error('name')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="slug" class="block text-sm font-medium text-gray-700 mb-2">Slug</label>
+                                <input type="text" 
+                                       id="slug" 
+                                       name="slug" 
+                                       value="{{ old('slug', $product->slug) }}"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('slug') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                @error('slug')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">Short Description</label>
+                                <textarea id="short_description" 
+                                          name="short_description" 
+                                          rows="3"
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('short_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">{{ old('short_description', $product->short_description) }}</textarea>
+                                @error('short_description')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <textarea id="description" 
+                                          name="description" 
+                                          rows="6"
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">{{ old('description', $product->description) }}</textarea>
+                                @error('description')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Pricing</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Regular Price <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                                        <input type="number" 
+                                               step="0.01" 
+                                               id="price" 
+                                               name="price" 
+                                               value="{{ old('price', $product->price) }}" 
+                                               required
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('price') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    </div>
+                                    @error('price')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="sale_price" class="block text-sm font-medium text-gray-700 mb-2">Sale Price</label>
+                                    <div class="relative">
+                                        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
+                                        <input type="number" 
+                                               step="0.01" 
+                                               id="sale_price" 
+                                               name="sale_price" 
+                                               value="{{ old('sale_price', $product->sale_price) }}"
+                                               class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('sale_price') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    </div>
+                                    @error('sale_price')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Inventory</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label for="sku" class="block text-sm font-medium text-gray-700 mb-2">SKU</label>
+                                    <input type="text" 
+                                           id="sku" 
+                                           name="sku" 
+                                           value="{{ old('sku', $product->sku) }}"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('sku') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    @error('sku')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-2">Stock Quantity</label>
+                                    <input type="number" 
+                                           id="stock_quantity" 
+                                           name="stock_quantity" 
+                                           value="{{ old('stock_quantity', $product->stock_quantity) }}"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('stock_quantity') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    @error('stock_quantity')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="stock_status" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Stock Status <span class="text-red-500">*</span>
+                                    </label>
+                                    <select id="stock_status" 
+                                            name="stock_status" 
+                                            required
+                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('stock_status') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                        <option value="in_stock" {{ old('stock_status', $product->stock_status) == 'in_stock' ? 'selected' : '' }}>In Stock</option>
+                                        <option value="out_of_stock" {{ old('stock_status', $product->stock_status) == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
+                                        <option value="on_backorder" {{ old('stock_status', $product->stock_status) == 'on_backorder' ? 'selected' : '' }}>On Backorder</option>
+                                    </select>
+                                    @error('stock_status')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Shipping</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+                                    <input type="number" 
+                                           step="0.01" 
+                                           id="weight" 
+                                           name="weight" 
+                                           value="{{ old('weight', $product->weight) }}"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('weight') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    @error('weight')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div>
+                                    <label for="dimensions" class="block text-sm font-medium text-gray-700 mb-2">Dimensions (L x W x H)</label>
+                                    <input type="text" 
+                                           id="dimensions" 
+                                           name="dimensions" 
+                                           value="{{ old('dimensions', $product->dimensions) }}"
+                                           placeholder="e.g., 10 x 5 x 3 cm"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('dimensions') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                    @error('dimensions')
+                                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEO -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">SEO</h3>
+                        </div>
+                        <div class="p-6 space-y-6">
+                            <div>
+                                <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+                                <input type="text" 
+                                       id="meta_title" 
+                                       name="meta_title" 
+                                       value="{{ old('meta_title', $product->meta_title) }}"
+                                       maxlength="60"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_title') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                @error('meta_title')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                                <p class="mt-1 text-sm text-gray-500">Recommended: 50-60 characters</p>
+                            </div>
+
+                            <div>
+                                <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                                <textarea id="meta_description" 
+                                          name="meta_description" 
+                                          rows="3"
+                                          maxlength="160"
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">{{ old('meta_description', $product->meta_description) }}</textarea>
+                                @error('meta_description')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                                <p class="mt-1 text-sm text-gray-500">Recommended: 150-160 characters</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- SKU -->
-                <div>
-                    <label for="sku" class="block text-sm font-medium text-gray-700 mb-2">SKU *</label>
-                    <input type="text" id="sku" name="sku" value="{{ old('sku', $product->sku) }}" required
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('sku') border-red-500 @enderror">
-                    @error('sku')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                <!-- Right Column - Sidebar -->
+                <div class="space-y-8">
+                    <!-- Product Status -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Product Status</h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <label for="is_active" class="text-sm font-medium text-gray-700">Active</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" 
+                                           id="is_active" 
+                                           name="is_active" 
+                                           value="1" 
+                                           {{ old('is_active', $product->is_active) ? 'checked' : '' }}
+                                           class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                                </label>
+                            </div>
 
-                <!-- Category -->
-                <div>
-                    <label for="category_id" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
-                    <select id="category_id" name="category_id" required
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('category_id') border-red-500 @enderror">
-                        <option value="">Select Category</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                {{ $category->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('category_id')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                            <div class="flex items-center justify-between">
+                                <label for="is_featured" class="text-sm font-medium text-gray-700">Featured</label>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" 
+                                           id="is_featured" 
+                                           name="is_featured" 
+                                           value="1" 
+                                           {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
+                                           class="sr-only peer">
+                                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-yellow-500"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Stock Quantity -->
-                <div>
-                    <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-2">Stock Quantity *</label>
-                    <input type="number" id="stock_quantity" name="stock_quantity" value="{{ old('stock_quantity', $product->stock_quantity) }}" min="0" required
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('stock_quantity') border-red-500 @enderror">
-                    @error('stock_quantity')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <!-- Categories -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">
+                                Categories <span class="text-red-500">*</span>
+                            </h3>
+                        </div>
+                        <div class="p-6">
+                            @error('categories')
+                                <div class="mb-4 bg-red-50 border border-red-200 rounded-lg p-4">
+                                    <p class="text-red-800 text-sm">{{ $message }}</p>
+                                </div>
+                            @enderror
 
-                <!-- Price -->
-                <div>
-                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price (Rp) *</label>
-                    <input type="number" id="price" name="price" value="{{ old('price', $product->price) }}" min="0" step="0.01" required
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('price') border-red-500 @enderror">
-                    @error('price')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                            <div class="space-y-3 max-h-64 overflow-y-auto">
+                                @foreach($categories as $category)
+                                    <label class="flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-150">
+                                        <input type="checkbox" 
+                                               name="categories[]"
+                                               value="{{ $category->id }}"
+                                               {{ in_array($category->id, old('categories', $product->categories->pluck('id')->toArray())) ? 'checked' : '' }}
+                                               class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                                        <div class="ml-3 flex items-center">
+                                            @if($category->color)
+                                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium text-white mr-2"
+                                                      style="background-color: {{ $category->color }};">
+                                                    @if($category->icon)
+                                                        <i class="{{ $category->icon }} mr-1"></i>
+                                                    @endif
+                                                </span>
+                                            @endif
+                                            <span class="text-sm font-medium text-gray-700">{{ $category->name }}</span>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- Sale Price -->
-                <div>
-                    <label for="sale_price" class="block text-sm font-medium text-gray-700 mb-2">Sale Price (Rp)</label>
-                    <input type="number" id="sale_price" name="sale_price" value="{{ old('sale_price', $product->sale_price) }}" min="0" step="0.01"
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('sale_price') border-red-500 @enderror">
-                    @error('sale_price')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <!-- Main Image -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Main Image</h3>
+                        </div>
+                        <div class="p-6">
+                            @if($product->image)
+                                <div class="mb-4">
+                                    <img src="{{ Storage::url($product->image) }}" 
+                                         alt="Current Image"
+                                         class="w-full h-48 object-cover rounded-lg border border-gray-200">
+                                    <p class="text-sm text-gray-500 mt-2">Current Image</p>
+                                </div>
+                            @endif
 
-                <!-- Weight -->
-                <div>
-                    <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
-                    <input type="number" id="weight" name="weight" value="{{ old('weight', $product->weight) }}" min="0" step="0.01"
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('weight') border-red-500 @enderror">
-                    @error('weight')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                            <div>
+                                <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Upload New Image</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors duration-200">
+                                    <div class="space-y-1 text-center">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="image" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <span>Upload a file</span>
+                                                <input id="image" name="image" type="file" accept="image/*" class="sr-only">
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                    </div>
+                                </div>
+                                @error('image')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
 
-                <!-- Dimensions -->
-                <div>
-                    <label for="dimensions" class="block text-sm font-medium text-gray-700 mb-2">Dimensions</label>
-                    <input type="text" id="dimensions" name="dimensions" value="{{ old('dimensions', $product->dimensions) }}" placeholder="L x W x H"
-                           class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('dimensions') border-red-500 @enderror">
-                    @error('dimensions')
-                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
+                            <div id="image-preview" class="mt-4 hidden">
+                                <img id="preview-img" src="/placeholder.svg" alt="Preview" class="w-full h-48 object-cover rounded-lg border border-gray-200">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Images -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-semibold text-gray-900">Additional Images</h3>
+                        </div>
+                        <div class="p-6">
+                            @if($product->images && count($product->images) > 0)
+                                <div class="mb-4">
+                                    <p class="text-sm font-medium text-gray-700 mb-3">Current Additional Images:</p>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        @foreach($product->images as $index => $image)
+                                            <img src="{{ Storage::url($image) }}" 
+                                                 alt="Additional Image {{ $index + 1 }}"
+                                                 class="w-full h-24 object-cover rounded-lg border border-gray-200">
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div>
+                                <label for="additional_images" class="block text-sm font-medium text-gray-700 mb-2">Upload New Additional Images</label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors duration-200">
+                                    <div class="space-y-1 text-center">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="additional_images" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <span>Upload files</span>
+                                                <input id="additional_images" name="additional_images[]" type="file" accept="image/*" multiple class="sr-only">
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">Multiple PNG, JPG, GIF files</p>
+                                    </div>
+                                </div>
+                                @error('additional_images.*')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div id="additional-images-preview" class="mt-4"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Short Description -->
-            <div>
-                <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">Short Description</label>
-                <textarea id="short_description" name="short_description" rows="3" maxlength="500"
-                          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('short_description') border-red-500 @enderror">{{ old('short_description', $product->short_description) }}</textarea>
-                @error('short_description')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Description -->
-            <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
-                <textarea id="description" name="description" rows="6" required
-                          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('description') border-red-500 @enderror">{{ old('description', $product->description) }}</textarea>
-                @error('description')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <!-- Current Image -->
-            @if($product->image)
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Current Image</label>
-                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-32 h-32 object-cover rounded-lg">
-                </div>
-            @endif
-
-            <!-- Product Image -->
-            <div>
-                <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
-                <input type="file" id="image" name="image" accept="image/*"
-                       class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('image') border-red-500 @enderror">
-                @error('image')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-                <p class="text-sm text-gray-500 mt-1">Leave empty to keep current image</p>
-            </div>
-
-            <!-- Checkboxes -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex items-center">
-                    <input type="checkbox" id="is_featured" name="is_featured" value="1" {{ old('is_featured', $product->is_featured) ? 'checked' : '' }}
-                           class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    <label for="is_featured" class="ml-2 block text-sm text-gray-900">Featured Product</label>
-                </div>
-
-                <div class="flex items-center">
-                    <input type="checkbox" id="is_active" name="is_active" value="1" {{ old('is_active', $product->is_active) ? 'checked' : '' }}
-                           class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    <label for="is_active" class="ml-2 block text-sm text-gray-900">Active</label>
-                </div>
-            </div>
-
-            <!-- Submit Buttons -->
-            <div class="flex justify-end space-x-4 pt-6 border-t">
-                <a href="{{ route('admin.products.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded-lg">
+            <!-- Form Actions -->
+            <div class="mt-8 flex flex-col sm:flex-row sm:justify-end sm:space-x-4 space-y-3 sm:space-y-0">
+                <a href="{{ route('admin.products.index') }}" 
+                   class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
                     Cancel
                 </a>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">
+                <button type="submit" 
+                        class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
                     Update Product
                 </button>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Auto-generate slug from name
+    const nameInput = document.getElementById('name');
+    const slugInput = document.getElementById('slug');
+    
+    nameInput.addEventListener('input', function() {
+        if (!slugInput.value || slugInput.value === slugify(nameInput.dataset.originalValue || '')) {
+            slugInput.value = slugify(this.value);
+        }
+    });
+    
+    // Store original name value
+    nameInput.dataset.originalValue = nameInput.value;
+    
+    function slugify(text) {
+        return text.toString().toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-')
+            .replace(/^-+/, '')
+            .replace(/-+$/, '');
+    }
+    
+    // Main image preview
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('image-preview');
+    const previewImg = document.getElementById('preview-img');
+    
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                imagePreview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.classList.add('hidden');
+        }
+    });
+    
+    // Additional images preview
+    const additionalImagesInput = document.getElementById('additional_images');
+    const additionalImagesPreview = document.getElementById('additional-images-preview');
+    
+    additionalImagesInput.addEventListener('change', function(e) {
+        additionalImagesPreview.innerHTML = '';
+        
+        if (e.target.files.length > 0) {
+            const previewContainer = document.createElement('div');
+            previewContainer.className = 'grid grid-cols-2 gap-3';
+            
+            Array.from(e.target.files).forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'w-full h-24 object-cover rounded-lg border border-gray-200';
+                        img.alt = `Preview ${index + 1}`;
+                        
+                        previewContainer.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            additionalImagesPreview.appendChild(previewContainer);
+        }
+    });
+});
+</script>
 @endsection

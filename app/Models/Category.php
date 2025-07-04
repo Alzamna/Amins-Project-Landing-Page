@@ -13,28 +13,43 @@ class Category extends Model
     protected $fillable = [
         'name',
         'slug',
-        'icon',
-        'color',
         'description',
+        'color',
+        'icon',
         'is_active',
         'sort_order'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'sort_order' => 'integer'
     ];
 
+    // Boot method to auto-generate slug
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($category) {
+            if (empty($category->slug)) {
+                $category->slug = Str::slug($category->name);
+            }
+        });
+
+        static::updating(function ($category) {
+            if ($category->isDirty('name') && empty($category->slug)) {
+                $category->slug = Str::slug($category->name);
+            }
+        });
+    }
+
+    // Relationships
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class, 'product_categories');
     }
 
-    public function setNameAttribute($value)
-    {
-        $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
-    }
-
+    // Scopes
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -42,6 +57,12 @@ class Category extends Model
 
     public function scopeOrdered($query)
     {
-        return $query->orderBy('sort_order', 'asc');
+        return $query->orderBy('sort_order')->orderBy('name');
+    }
+
+    // Accessors
+    public function getProductCountAttribute()
+    {
+        return $this->products()->count();
     }
 }

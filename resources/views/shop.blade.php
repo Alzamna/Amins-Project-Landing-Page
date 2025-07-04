@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Shop')
+
 <link
 rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
@@ -81,7 +82,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
           <!-- Featured Products Grid -->
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               @foreach($featured_products as $product)
-                  <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-category="{{ $product->category->slug }}">
+                  <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
                       <a href="{{ route('shop.product', $product->slug) }}" class="block relative">
                           <div class="relative">
                               @if($product->image)
@@ -106,7 +107,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
                                           FEATURED
                                       </div>
                                   @endif
-                                  @if($product->created_at->diffInDays() < 2)
+                                  @if($product->created_at->diffInDays() < 7)
                                       <div class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
                                           NEW
                                       </div>
@@ -115,9 +116,11 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
                               <!-- Category Badge -->
                               <div class="absolute top-4 left-4">
-                                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-600 text-white">
-                                      {{ $product->category->name }}
-                                  </span>
+                                  @if($product->categories->first())
+                                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-600 text-white">
+                                          {{ $product->categories->first()->name }}
+                                      </span>
+                                  @endif
                               </div>
                           </div>
                       </a>
@@ -157,7 +160,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
       @endif
 
       <!-- All Products Section -->
-      @if($all_products->count() > 0)
+      @if($products->count() > 0)
       <div class="mt-20">
           <div class="text-center mb-12">
               <h2 class="text-3xl lg:text-4xl font-bold text-blue-900 mb-4">
@@ -170,8 +173,8 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
           <!-- All Products Grid -->
           <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              @foreach($all_products as $product)
-                  <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-category="{{ $product->category->slug }}">
+              @foreach($products as $product)
+                  <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
                       <a href="{{ route('shop.product', $product->slug) }}" class="block relative">
                           <div class="relative">
                               @if($product->image)
@@ -191,7 +194,7 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
                                           -{{ round((($product->price - $product->sale_price) / $product->price) * 100) }}%
                                       </div>
                                   @endif
-                                  @if($product->created_at->diffInDays() < 2)
+                                  @if($product->created_at->diffInDays() < 7)
                                       <div class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
                                           NEW
                                       </div>
@@ -200,9 +203,11 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
                               <!-- Category Badge -->
                               <div class="absolute top-4 left-4">
-                                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-600 text-white">
-                                      {{ $product->category->name }}
-                                  </span>
+                                  @if($product->categories->first())
+                                      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-600 text-white">
+                                          {{ $product->categories->first()->name }}
+                                      </span>
+                                  @endif
                               </div>
                           </div>
                       </a>
@@ -240,16 +245,16 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
           </div>
 
           <!-- Pagination -->
-          @if(method_exists($all_products, 'links'))
+          @if(method_exists($products, 'links'))
               <div class="mt-12">
-                  {{ $all_products->links() }}
+                  {{ $products->links() }}
               </div>
           @endif
       </div>
       @endif
 
       <!-- Empty State -->
-      @if((!isset($featured_products) || $featured_products->count() == 0) && (!isset($all_products) || $all_products->count() == 0))
+      @if((!isset($featured_products) || $featured_products->count() == 0) && (!isset($products) || $products->count() == 0))
       <div class="mt-20 text-center py-16">
           <div class="max-w-md mx-auto">
               <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

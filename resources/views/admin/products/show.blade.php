@@ -32,29 +32,42 @@
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 p-6">
-            <!-- Product Image -->
+            <!-- Product Images -->
             <div>
-                @if($product->image)
-                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-lg">
+                @if($product->main_image)
+                    <img src="{{ Storage::url($product->main_image) }}" alt="{{ $product->name }}" class="w-full h-96 object-cover rounded-lg mb-4">
                 @else
-                    <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <div class="w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center mb-4">
                         <i class="fas fa-image text-gray-400 text-6xl"></i>
+                    </div>
+                @endif
+
+                <!-- Additional Images -->
+                @if($product->images && count($product->images) > 0)
+                    <div class="grid grid-cols-4 gap-2">
+                        @foreach($product->images as $image)
+                            <img src="{{ Storage::url($image) }}" alt="{{ $product->name }}" class="w-full h-20 object-cover rounded border">
+                        @endforeach
                     </div>
                 @endif
             </div>
 
             <!-- Product Details -->
             <div class="space-y-6">
-                <!-- Category -->
+                <!-- Categories -->
                 <div>
-                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Category</h3>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium mt-1" 
-                          style="background-color: {{ $product->category->color }}20; color: {{ $product->category->color }}">
-                        @if($product->category->icon)
-                            <i class="{{ $product->category->icon }} mr-2"></i>
-                        @endif
-                        {{ $product->category->name }}
-                    </span>
+                    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Categories</h3>
+                    <div class="mt-1 flex flex-wrap gap-2">
+                        @foreach($product->categories as $category)
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-white" 
+                                  style="background-color: {{ $category->color }};">
+                                @if($category->icon)
+                                    <i class="{{ $category->icon }} mr-2"></i>
+                                @endif
+                                {{ $category->name }}
+                            </span>
+                        @endforeach
+                    </div>
                 </div>
 
                 <!-- Price -->
@@ -107,6 +120,21 @@
                     </div>
                 </div>
 
+                <!-- SEO Fields -->
+                @if($product->meta_title || $product->meta_description)
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">SEO</h3>
+                        <div class="mt-1 space-y-1">
+                            @if($product->meta_title)
+                                <p class="text-sm text-gray-700"><strong>Title:</strong> {{ $product->meta_title }}</p>
+                            @endif
+                            @if($product->meta_description)
+                                <p class="text-sm text-gray-700"><strong>Description:</strong> {{ $product->meta_description }}</p>
+                            @endif
+                        </div>
+                    </div>
+                @endif
+
                 <!-- Dimensions & Weight -->
                 @if($product->weight || $product->dimensions)
                     <div>
@@ -146,6 +174,21 @@
                 <h3 class="text-lg font-medium text-gray-900 mb-3">Description</h3>
                 <div class="text-gray-700 whitespace-pre-line">{{ $product->description }}</div>
             </div>
+
+            <!-- Specifications -->
+            @if($product->specifications && is_array($product->specifications) && count($product->specifications) > 0)
+                <div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-3">Specifications</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        @foreach($product->specifications as $key => $value)
+                            <div class="flex justify-between py-2 border-b border-gray-200">
+                                <span class="font-medium text-gray-700">{{ ucfirst($key) }}:</span>
+                                <span class="text-gray-600">{{ $value }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
 
         <!-- Actions -->
