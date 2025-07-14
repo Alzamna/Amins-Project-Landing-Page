@@ -7,16 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
 @section('content')
-<div class=py-20 bg-gray-50 min-h-screen">
+<div class="py-20 bg-gray-50 min-h-screen">
     <!-- Header Section -->
     <div class="bg-white border-b border-gray-100 sticky top-0 z-40 backdrop-blur-lg bg-white/80">
         <div class="container mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        Amins Project Shop
+                        Technology Shop
                     </h1>
-                    <p class="text-gray-600 mt-1">Temukan berbagai produk teknologi terbaik untuk kebutuhan bisnis dan personal Anda</p>
+                    <p class="text-gray-600 mt-1">Discover premium tech products for your needs</p>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <div class="bg-blue-50 px-4 py-2 rounded-full">
@@ -371,7 +371,13 @@
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.02), rgba(99, 102, 241, 0.02));
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 1;
+    /* Remove this line: z-index: 1; */
+}
+
+/* Ensure product links are clickable */
+.product-card a {
+    position: relative;
+    z-index: 2;
 }
 
 .product-card:hover::before {
@@ -574,6 +580,17 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!this.classList.contains('active')) {
                 this.style.transform = 'translateY(0) scale(1)';
             }
+        });
+    });
+
+    // Ensure product links are clickable
+    productCards.forEach(card => {
+        const productLinks = card.querySelectorAll('a[href*="shop.product"]');
+        productLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Ensure the click event propagates normally
+                e.stopPropagation();
+            });
         });
     });
 });
