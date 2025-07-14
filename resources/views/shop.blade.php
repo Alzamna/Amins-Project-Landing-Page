@@ -14,9 +14,9 @@
             <div class="flex items-center justify-between">
                 <div>
                     <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                        Technology Shop
+                        Shop
                     </h1>
-                    <p class="text-gray-600 mt-1">Discover premium tech products for your needs</p>
+                    <p class="text-gray-600 mt-1">Temukan berbagai produk teknologi terbaik untuk kebutuhan bisnis dan personal Anda</p>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
                     <div class="bg-blue-50 px-4 py-2 rounded-full">
