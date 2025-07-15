@@ -1951,7 +1951,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
                             </svg>
                         </div>
-                        <span class="text-gray-800 font-medium">Respon Cepat</span>
+                        <span class="text-gray-700 text-lg">Respon Cepat</span>
                     </div>
                     
                     <div class="flex items-center gap-3">
@@ -1960,7 +1960,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                             </svg>
                         </div>
-                        <span class="text-gray-800 font-medium">Harga Bisa Request</span>
+                        <span class="text-gray-700 text-lg">Harga Bisa Request</span>
                     </div>
             </div>
       </div>

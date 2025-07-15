@@ -3,10 +3,10 @@
 @section('title', 'Portfolio')
 
 @section('content')
-<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 pt-16">
-    <div class="container mx-auto px-4">
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 pt-16 pb-10 flex flex-col">
+    <div class="flex-grow">
         <!-- Header Section -->
-        <div class="text-center mb-16 mt-8">
+        <div class="text-center mb-10 mt-8">
             <h1 class="text-5xl font-bold text-blue-900 mb-6">
                 Portfolio Kami
             </h1>
