@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 @section('content')
 <div class="py-20 bg-gray-50 min-h-screen">
@@ -13,14 +13,14 @@
         <div class="container mx-auto px-4 py-6">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    <h1 class="text-3xl font-bold bg-gradient-to-r from-[#09186C] to-[#09186C] bg-clip-text text-transparent">
                         Shop
                     </h1>
                     <p class="text-gray-600 mt-1">Temukan produk berkualitas untuk kebutuhan anda</p>
                 </div>
                 <div class="hidden md:flex items-center space-x-4">
-                    <div class="bg-blue-50 px-4 py-2 rounded-full">
-                        <span class="text-blue-600 font-medium text-sm">{{ $products->count() + $featured_products->count() }} Products</span>
+                    <div class="bg-[#09186C]/10 px-4 py-2 rounded-full">
+                        <span class="text-[#09186C] font-medium text-sm">{{ $products->count() + $featured_products->count() }} Products</span>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <!-- Filter Header -->
                     <div class="p-6 border-b border-gray-100">
                         <h2 class="text-xl font-bold text-gray-900 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 mr-2 text-[#09186C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
                             </svg>
                             Filter Products
@@ -46,7 +46,7 @@
                     <!-- Category Filters -->
                     <div class="p-6">
                         <div class="space-y-3">
-                            <button class="category-filter active w-full text-left px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-between group" data-category="all">
+                            <button class="category-filter active w-full text-left px-4 py-3 bg-gradient-to-r from-[#09186C] to-[#09186C] text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-between group" data-category="all">
                                 <span class="flex items-center">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -77,14 +77,14 @@
                     </div>
 
                     <!-- Quick Stats -->
-                    <div class="p-6 border-t border-gray-100 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-b-2xl">
+                    <div class="p-6 border-t border-gray-100 bg-gradient-to-r from-[#09186C]/10 to-[#09186C]/10 rounded-b-2xl">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-blue-600">{{ $featured_products->count() }}</div>
+                                <div class="text-2xl font-bold text-[#09186C]">{{ $featured_products->count() }}</div>
                                 <div class="text-xs text-gray-600">Featured</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-indigo-600">{{ $products->count() }}</div>
+                                <div class="text-2xl font-bold text-[#09186C]">{{ $products->count() }}</div>
                                 <div class="text-xs text-gray-600">Total</div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 flex items-center">
-                                <svg class="w-6 h-6 mr-2 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                                <svg class="w-6 h-6 mr-2 text-[#FAAA00]" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                                 </svg>
                                 Produk Unggulan
@@ -108,7 +108,7 @@
                             <p class="text-gray-600">Koleksi produk terbaik</p>
                         </div>
                         <div class="hidden md:block">
-                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
+                            <span class="bg-[#FAAA00] text-[#09186C] px-3 py-1 rounded-full text-sm font-medium">
                                 {{ $featured_products->count() }} items
                             </span>
                         </div>
@@ -134,7 +134,7 @@
                                         
                                         <!-- Badges -->
                                         <div class="absolute top-4 right-4 space-y-2">
-                                            <div class="bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                            <div class="bg-[#FAAA00] text-[#09186C] px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                                                 ⭐ FEATURED
                                             </div>
                                             @if($product->sale_price)
@@ -178,7 +178,7 @@
                                     </div>
                                     
                                     <a href="https://wa.me/6281234567890?text=Halo, saya tertarik dengan produk {{ urlencode($product->name) }} ({{ route('shop.product', $product->slug) }})"
-                                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center group"
+                                        class="w-full bg-gradient-to-r from-[#09186C] to-[#09186C] hover:from-[#09186C]/90 hover:to-[#09186C]/90 text-white px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center group"
                                         target="_blank" rel="noopener noreferrer">
                                         <svg class="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
                                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
@@ -207,15 +207,15 @@
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h2 class="text-2xl font-bold text-gray-900 flex items-center">
-                                <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012 2v2M7 7h10"></path>
+                                <svg class="w-6 h-6 mr-2 text-[#09186C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
                                 All Products
                             </h2>
                             <p class="text-gray-600">Complete collection of tech products</p>
                         </div>
                         <div class="hidden md:block">
-                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                            <span class="bg-[#09186C]/10 text-[#09186C] px-3 py-1 rounded-full text-sm font-medium">
                                 {{ $products->count() }} items
                             </span>
                         </div>
@@ -265,7 +265,7 @@
                                 </a>
                                 
                                 <div class="p-6">
-                                    <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
+                                    <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-[#09186C] transition-colors">
                                         <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg">{{ $product->name }}</h3>
                                         <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">{{ Str::limit($product->description, 100) }}</p>
                                     </a>
@@ -325,7 +325,7 @@
                         </div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">No Products Available</h3>
                         <p class="text-gray-600 mb-8 leading-relaxed">Products will be available soon. Please check back later or contact us for more information.</p>
-                        <a href="{{ route('contact') }}" class="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
+                        <a href="{{ route('contact') }}" class="inline-flex items-center bg-gradient-to-r from-[#09186C] to-[#09186C] hover:from-[#09186C]/90 hover:to-[#09186C]/90 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
@@ -342,7 +342,7 @@
 <style>
 /* Custom Styles */
 * {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Line clamp utility */
@@ -368,7 +368,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.02), rgba(99, 102, 241, 0.02));
+    background: linear-gradient(135deg, rgba(9, 24, 108, 0.02), rgba(9, 24, 108, 0.02));
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     /* Remove this line: z-index: 1; */
@@ -386,9 +386,9 @@
 
 /* Category Filter Styles */
 .category-filter.active {
-    background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+    background: linear-gradient(135deg, #09186C, #09186C) !important;
     color: white !important;
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 8px 25px rgba(9, 24, 108, 0.3);
 }
 
 .category-filter:not(.active) {
