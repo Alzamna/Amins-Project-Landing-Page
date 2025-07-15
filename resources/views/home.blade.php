@@ -38,6 +38,15 @@
     </script>
 </head>
 <body class="font-poppins antialiased" >
+    <!-- Page Loader -->
+    <div id="loader" class="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity duration-500">
+        <div class="relative">
+            <div class="w-20 h-20 border-4 border-orange-500 rounded-full animate-spin border-t-transparent"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <img src="{{ asset('images/logo-aminsproject.png') }}" alt="AMINS PROJECT" class="w-10 h-10 object-contain">
+            </div>
+        </div>
+    </div>
     <header id="sticky-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out">
     <div class="container mx-auto px-4">
         <!-- Main navigation -->
@@ -2505,5 +2514,18 @@ function toggleFaq(index) {
     }
 }
 </style>
+
+<script>
+// Hide loader once page fully loaded
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 500);
+    }
+});
+</script>
 </body>
 </html>
