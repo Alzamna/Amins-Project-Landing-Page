@@ -46,7 +46,7 @@
                     <!-- Category Filters -->
                     <div class="p-6">
                         <div class="space-y-3">
-                            <button class="category-filter active w-full text-left px-4 py-3 bg-gradient-to-r from-[#09186C] to-[#09186C] text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-between group" data-category="all">
+                            <button class="category-filter active w-full text-left px-4 py-3 bg-gray-50 hover:bg-gray-100 text-gray-700 rounded-xl font-medium transition-all duration-300 hover:shadow-md transform hover:-translate-y-0.5 flex items-center justify-between group" data-category="all">
                                 <span class="flex items-center">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -116,7 +116,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
                         @foreach($featured_products as $product)
-                            <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
+                            <div class="product-card group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
                                 <a href="{{ route('shop.product', $product->slug) }}" class="block">
                                     <div class="relative overflow-hidden">
                                         @if($product->image)
@@ -160,11 +160,13 @@
                                     </div>
                                 </a>
                                 
-                                <div class="p-6">
-                                    <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
-                                        <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg">{{ $product->name }}</h3>
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">{{ Str::limit($product->description, 100) }}</p>
-                                    </a>
+                                <div class="p-6 flex flex-col flex-grow">
+                                    <div class="flex-grow">
+                                        <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
+                                            <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg h-14">{{ $product->name }}</h3>
+                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed h-20">{{ Str::limit($product->description, 100) }}</p>
+                                        </a>
+                                    </div>
                                     
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
@@ -223,7 +225,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
                         @foreach($products as $product)
-                            <div class="product-card group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
+                            <div class="product-card group flex flex-col bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100" data-category="{{ $product->categories->first() ? $product->categories->first()->slug : 'uncategorized' }}">
                                 <a href="{{ route('shop.product', $product->slug) }}" class="block">
                                     <div class="relative overflow-hidden">
                                         @if($product->image)
@@ -264,11 +266,13 @@
                                     </div>
                                 </a>
                                 
-                                <div class="p-6">
-                                    <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-[#09186C] transition-colors">
-                                        <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg">{{ $product->name }}</h3>
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">{{ Str::limit($product->description, 100) }}</p>
-                                    </a>
+                                <div class="p-6 flex flex-col flex-grow">
+                                    <div class="flex-grow">
+                                        <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
+                                            <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg h-14">{{ $product->name }}</h3>
+                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">{{ Str::limit($product->description, 100) }}</p>
+                                        </a>
+                                    </div>
                                     
                                     <div class="flex items-center justify-between mb-4">
                                         <div>
@@ -501,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let visibleCount = 0;
             productCards.forEach((card, index) => {
                 if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
+                    card.style.display = 'flex'; // Use flex to maintain alignment
                     setTimeout(() => {
                         card.style.opacity = '0';
                         card.style.transform = 'translateY(30px)';
