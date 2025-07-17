@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\PortfolioController as AdminPortfolioController;
-
+use App\Http\Controllers\Admin\UserController;
 
 // DEBUG ROUTES - Remove after debugging
 Route::get('/debug-auth', function() {
@@ -23,17 +23,12 @@ Route::get('/debug-auth', function() {
     ];
 });
 
-Route::get('/test-admin', function() {
-    if (!auth()->check()) {
-        return 'Not authenticated';
-    }
-    
-    if (auth()->user()->role !== 'admin') {
-        return 'Not admin. Role: ' . auth()->user()->role;
-    }
-    
-    return 'Admin access OK! Redirecting to dashboard...';
-})->middleware('auth');
+Route::get('/force-logout', function() {
+    auth()->logout();
+    session()->flush();
+    session()->regenerate();
+    return redirect('/')->with('message', 'Logged out successfully');
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +38,8 @@ Route::get('/test-admin', function() {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
+    // Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    // Route::post('/register', [AuthController::class, 'register']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
@@ -103,6 +98,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     
     // Portfolio Management
     Route::resource('portfolios', AdminPortfolioController::class);
+
+    // User Management
+    Route::resource('users', UserController::class);
+
 });
 
 /*

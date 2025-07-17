@@ -63,6 +63,14 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('admin.users.index') }}" 
+                           class="flex items-center px-3 py-2 text-gray-700 rounded-lg hover:bg-gray-100 {{ request()->routeIs('admin.users.*') ? 'bg-blue-50 text-blue-700' : '' }}">
+                            <i class="fas fa-users w-5 text-center mr-3"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
                     
                     <li>
                         <a href="{{ route('admin.products.index') }}" 

@@ -44,6 +44,11 @@
                     </label>
                 </div>
 
+                <div class="text-sm">
+                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500">
+                        Forgot your password?
+                    </a>
+                </div>
             </div>
 
             <div>
@@ -58,14 +63,11 @@
                 </button>
             </div>
 
-            {{-- <div class="text-center">
+            <div class="text-center">
                 <p class="text-sm text-gray-600">
-                    Don't have an account? 
-                    <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                        Sign up here
-                    </a>
+                    Contact administrator to create an account.
                 </p>
-            </div> --}}
+            </div>
         </form>
     </div>
 </div>
