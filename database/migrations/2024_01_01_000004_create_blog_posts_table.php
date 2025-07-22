@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('is_published')->default(false);
             $table->integer('views_count')->default(0);
             $table->integer('comments_count')->default(0);
+            $table->string('meta_title', 60)->nullable();
+            $table->string('meta_description', 160)->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
 

@@ -40,7 +40,7 @@
                     <div class="bg-white rounded-2xl shadow-xl p-8">
                         <h2 class="text-2xl font-bold text-blue-900 mb-6">Deskripsi Proyek</h2>
                         <div class="prose prose-lg max-w-none text-gray-700">
-                            {!! nl2br(e($portfolio->description)) !!}
+                            {!! $portfolio->description !!}
                         </div>
                     </div>
                 </div>

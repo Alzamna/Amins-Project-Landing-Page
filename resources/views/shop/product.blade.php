@@ -195,7 +195,7 @@
                     <div>
                         <h3 class="text-2xl font-bold text-gray-900 mb-4">Description</h3>
                         <div class="prose prose-lg text-gray-600">
-                            {!! nl2br(e($product->description)) !!}
+                            {!! $product->description !!}
                         </div>
                     </div>
                     @endif

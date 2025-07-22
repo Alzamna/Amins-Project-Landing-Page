@@ -85,7 +85,7 @@
 
             <!-- Login Button -->
             <div class="hidden lg:flex items-center">
-                <a href="https://wa.me/6289537980511"
+                <a href="https://api.whatsapp.com/send/?phone=62895379905511&amp;text=Halo+saya+ingin+konsultasi+dengan+amins+project,+bisakah+saya+untuk+bertanya+?&amp;type=phone_number&amp;app_absent=0" target="_blank"
                     class="login-btn bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg text-base font-semibold transition-all duration-300 whitespace-nowrap hover:scale-105 hover:shadow-lg border-2 border-orange-500 hover:border-orange-600">
                     Konsultasi Gratis
                 </a>
@@ -503,11 +503,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         The Heart
                     </h2>
                 </div>
+                
+                <p class="text-blue-100 text-lg lg:text-xl leading-relaxed max-w-2xl animate-fade-in-delayed">
+                    Jadilah saksi atas perjalanan kami untuk membangun bisnis ini dengan bekerjasama dengan kami, 
+                    yakinlah kami akan berusaha sekuat tenaga dan pemikiran yang jernih demi tujuan yang baik.
+                </p>
 
                 <p class="text-blue-100 text-lg lg:text-xl leading-relaxed max-w-2xl animate-fade-in-delayed">
-                    Spesialis layanan IT yang menangani berbagai kebutuhan bisnis, industri, dan e-commerce. 
-                    Mulai dari pengembangan website, aplikasi, jaringan, keamanan, hingga solusi teknologi lainnya. 
-                    <span class="font-semibold text-white">Gratis konsultasi dan dukungan pemeliharaan berkelanjutan</span>.
+                    Spesialis layanan IT yang menangani berbagai kebutuhan Bisnis, Industri, Corporate dan Government. 
+                    <br>
+                        <span class="font-semibold text-white">Gratis konsultasi dan dukungan pemeliharaan</span>.
+                    </br>
                 </p>
 
 
@@ -540,12 +546,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="relative">
                         <img src="{{ asset('images/intro.png') }}" 
                              alt="Professional Developer" 
-                             class="w-full h-auto object-cover rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                             class="w-full h-auto object-cover rounded-2xl"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent rounded-2xl"></div>
+
                     </div>
                     
-                    <div class="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-xl p-4 animate-bounce-slow hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-xl p-4 animate-bounce-slow">
                         <div class="flex items-center space-x-3">
                             <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -744,13 +750,11 @@ a:focus {
                 </div>
                 
                 <div class="relative z-10 flex justify-end group">
-                    <div class="relative overflow-hidden rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-500">
+                    <div class="relative overflow-hidden rounded-2xl">
                         <img src="{{ asset('images/aboutus.png') }}" 
                              alt="Professional man with laptop - About Amins Project" 
-                             class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                             class="w-full h-auto object-cover"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        
                     </div>
                 </div>
             </div>
@@ -774,10 +778,10 @@ a:focus {
                 <div class="space-y-6">
                     <p class="text-gray-600 leading-relaxed text-lg animate-fade-in-up animation-delay-400 relative">
                         <span class="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-blue-600 to-orange-400 rounded-full"></span>
-                        Amin's Project Teknologi Indonesia adalah sebuah bisnis yang bergerak dalam bidang <span class="font-semibold text-blue-900">Software Developer</span>, <span class="font-semibold text-blue-900">Riset Teknologi</span>, Teknologi Informasi, Penjualan Perangkat Teknologi dan Multimedia Digital Creative yang berdiri pada tahun <span class="font-bold text-orange-600">2015</span>.
+                        Amin's Project Teknologi Indonesia adalah sebuah bisnis yang bergerak dalam bidang <span class="font-semibold text-blue-900">Software Developer</span>, <span class="font-semibold text-blue-900">Riset Teknologi</span>, <span class="font-semibold text-blue-900">Teknologi Informasi</span>, <span class="font-semibold text-blue-900">Penjualan Perangkat Teknologi</span> dan <span class="font-semibold text-blue-900">Multimedia Digital Creative yang berdiri pada tahun </span><span class="font-bold text-orange-600">2015</span>.
                     </p>
                     
-                    <p class="text-gray-600 leading-relaxed animate-fade-in-up animation-delay-600">
+                    <p class="text-gray-600 leading-relaxed text-lg animate-fade-in-up animation-delay-600">
                         Seluruh bidang yang telah kami kerjakan dikemas dengan kreatif, ringan, namun sangat membantu dalam pengembangan bisnis serta perusahaan anda. Kami berkomitmen memberikan <span class="font-semibold text-blue-900">pelayanan sebaik mungkin</span> demi hasil yang memuaskan.
                     </p>
                 </div>
@@ -791,14 +795,14 @@ a:focus {
                     </div>
                     <div class="text-center group">
                         <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-4 group-hover:shadow-lg transition-all duration-300">
-                            <div class="text-3xl font-bold text-orange-600 counter" data-target="100">0</div>
+                            <div class="text-3xl font-bold text-orange-600 counter" data-target="257">0</div>
                             <div class="text-sm text-gray-600 font-medium">Project Selesai</div>
                         </div>
                     </div>
                     <div class="text-center group">
                         <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 group-hover:shadow-lg transition-all duration-300">
-                            <div class="text-3xl font-bold text-green-600 counter" data-target="50">0</div>
-                            <div class="text-sm text-gray-600 font-medium">Client Puas</div>
+                            <div class="text-3xl font-bold text-green-600 counter" data-target="78">0</div>
+                            <div class="text-sm text-gray-600 font-medium">Client</div>
                         </div>
                     </div>
                 </div>
@@ -812,7 +816,7 @@ a:focus {
                         </svg>
                     </a>
                     
-                    <a href="tel:+6289537980511" class="group bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 relative overflow-hidden">
+                    <a href="https://api.whatsapp.com/send/?phone=62895379905511&amp;text=Halo+saya+ingin+konsultasi+dengan+amins+project,+bisakah+saya+untuk+bertanya+?&amp;type=phone_number&amp;app_absent=0" target="_blank" class="group bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                         <svg class="w-5 h-5 mr-3 animate-pulse relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
@@ -1638,7 +1642,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <!-- Right side - Image -->
             <div class="relative">
-                <img src="images/meet.jpg" 
+                <img src="images/meet.png" 
                      alt="Team collaboration - FAQ section" 
                      class="w-full h-auto object-cover rounded-lg">
             </div>
@@ -1915,7 +1919,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     <!-- Gambar Full Kiri -->
     <div class="relative w-full lg:w-1/2 h-96 lg:h-auto">
-      <img src="{{ asset('images/seet.png') }}" alt="Customer Service"
+      <img src="{{ asset('images/seet1.png') }}" alt="Customer Service"
            class="absolute inset-0 w-full h-full object-cover object-left" />
       
       <!-- Overlay Gradient dari kiri ke kanan -->
@@ -1933,7 +1937,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </h2>
 
       <p class="text-gray-700 mb-8 text-lg leading-relaxed">
-      Dengan pengalaman dan tim ahli di berbagai bidang IT, kami siap membantu Anda dalam pengembangan software, aplikasi, infrastruktur jaringan, hingga keamanan digital. Mulai sekarang!
+      Dengan pengalaman dan tim ahli di berbagai bidang IT, kami siap membantu Anda dalam pengembangan dan pembuatan software, aplikasi, infrastruktur jaringan, server hingga keamanan digital. Mulai sekarang!
       </p>
 
       <a href="https://wa.me/6281234567890"
@@ -1960,8 +1964,18 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                             </svg>
                         </div>
-                        <span class="text-gray-700 text-lg">Harga Bisa Request</span>
+                        <span class="text-gray-700 text-lg">Harga Bisa Nego</span>
                     </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                            </svg>
+                        </div>
+                        <span class="text-gray-700 text-lg">Layanan Profesional</span>
+                    </div>
+                    
             </div>
       </div>
     </div>

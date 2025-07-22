@@ -54,21 +54,12 @@
                         </div>
 
                         <!-- Description -->
-                        <div>
-                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">
-                                Deskripsi <span class="text-red-500">*</span>
-                            </label>
-                            <textarea id="description" 
-                                      name="description" 
-                                      rows="6"
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
-                                      placeholder="Jelaskan detail tentang proyek ini..."
-                                      required>{{ old('description') }}</textarea>
+                        <div class="mb-6">
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
+                            <div id="description-editor" style="min-height:150px;">{{ old('description') }}</div>
+                            <textarea name="description" id="description" class="hidden">{{ old('description') }}</textarea>
                             @error('description')
-                                <p class="mt-2 text-sm text-red-600 flex items-center">
-                                    <i class="fas fa-exclamation-circle mr-1"></i>
-                                    {{ $message }}
-                                </p>
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
@@ -109,6 +100,33 @@
                                     {{ $message }}
                                 </p>
                             @enderror
+                        </div>
+                    </div>
+                </div>
+                <!-- SEO -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">SEO</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+                            <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title') }}"
+                                maxlength="60"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('meta_title') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+                                placeholder="SEO title for search engines">
+                            @error('meta_title')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-sm text-gray-500">Recommended: 50-60 characters</p>
+                        </div>
+                        <div>
+                            <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                            <textarea id="meta_description" name="meta_description" rows="3" maxlength="160"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('meta_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+                                placeholder="SEO description for search engines">{{ old('meta_description') }}</textarea>
+                            @error('meta_description')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-sm text-gray-500">Recommended: 150-160 karakter</p>
                         </div>
                     </div>
                 </div>
@@ -292,4 +310,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script>
+        var descriptionQuill = new Quill('#description-editor', { theme: 'snow' });
+        descriptionQuill.root.innerHTML = document.getElementById('description').value;
+        document.getElementById('description-editor').closest('form').addEventListener('submit', function() {
+            document.getElementById('description').value = descriptionQuill.root.innerHTML;
+        });
+    </script>
+@endpush
 @endsection

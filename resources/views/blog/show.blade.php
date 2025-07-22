@@ -33,7 +33,7 @@
 
                 <!-- Excerpt -->
                 <p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-3xl mx-auto">
-                    {{ $blogPost->excerpt }}
+                    {!! $blogPost->excerpt !!}
                 </p>
 
                 <!-- Meta Information -->
@@ -91,7 +91,7 @@
                     <!-- Article Body -->
                     <div class="prose prose-lg max-w-none">
                         <div class="text-gray-800 leading-relaxed">
-                            {!! nl2br(e($blogPost->content)) !!}
+                            {!! $blogPost->content !!}
                         </div>
                     </div>
 

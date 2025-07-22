@@ -64,7 +64,7 @@
                             </h2>
                             
                             <p class="text-gray-600 leading-relaxed mb-6 text-lg">
-                                {{ $featuredPost->excerpt_limited }}
+                                {!! $featuredPost->excerpt !!}
                             </p>
                             
                             <div class="flex items-center justify-between">
@@ -159,7 +159,7 @@
                                 </div>
                                 
                                 <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                                    {{ $post->excerpt_limited }}
+                                    {!! $post->excerpt !!}
                                 </p>
 
                                 <div class="mt-3 pt-3 border-t border-gray-100">

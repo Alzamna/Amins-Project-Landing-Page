@@ -30,7 +30,9 @@ class PortfolioController extends Controller
             'project_url' => 'nullable|url',
             'technologies' => 'nullable|string',
             'status' => 'required|in:draft,published',
-            'featured' => 'boolean'
+            'featured' => 'boolean',
+            'meta_title' => 'nullable|string|max:60',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
         $data = $request->all();
@@ -73,7 +75,9 @@ class PortfolioController extends Controller
             'project_url' => 'nullable|url',
             'technologies' => 'nullable|string',
             'status' => 'required|in:draft,published',
-            'featured' => 'boolean'
+            'featured' => 'boolean',
+            'meta_title' => 'nullable|string|max:60',
+            'meta_description' => 'nullable|string|max:160',
         ]);
 
         $data = $request->all();

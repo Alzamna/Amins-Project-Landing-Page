@@ -7,8 +7,8 @@
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Edit Product</h1>
-                    <p class="mt-2 text-sm text-gray-600">Update product information and settings</p>
+                    <h1 class="text-3xl font-bold text-gray-900">Edit Produk</h1>
+                    <p class="mt-2 text-sm text-gray-600">Perbarui informasi dan pengaturan produk</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
                     <a href="{{ route('admin.products.index') }}" 
@@ -16,7 +16,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                         </svg>
-                        Back to Products
+                        Kembali ke Produk
                     </a>
                 </div>
             </div>
@@ -32,12 +32,12 @@
                     <!-- Basic Information -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Basic Information</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Informasi Dasar</h3>
                         </div>
                         <div class="p-6 space-y-6">
                             <div>
                                 <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                                    Product Name <span class="text-red-500">*</span>
+                                    Nama Produk <span class="text-red-500">*</span>
                                 </label>
                                 <input type="text" 
                                        id="name" 
@@ -63,7 +63,7 @@
                             </div>
 
                             <div>
-                                <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">Short Description</label>
+                                <label for="short_description" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Singkat</label>
                                 <textarea id="short_description" 
                                           name="short_description" 
                                           rows="3"
@@ -74,11 +74,9 @@
                             </div>
 
                             <div>
-                                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                <textarea id="description" 
-                                          name="description" 
-                                          rows="6"
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">{{ old('description', $product->description) }}</textarea>
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+                                <div id="description-editor" style="min-height:150px;">{{ old('description', $product->description) }}</div>
+                                <textarea name="description" id="description" class="hidden">{{ old('description', $product->description) }}</textarea>
                                 @error('description')
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
@@ -89,14 +87,12 @@
                     <!-- Pricing -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Pricing</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Harga</h3>
                         </div>
                         <div class="p-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Regular Price <span class="text-red-500">*</span>
-                                    </label>
+                                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Harga Normal <span class="text-red-500">*</span></label>
                                     <div class="relative">
                                         <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
                                         <input type="number" 
@@ -113,7 +109,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="sale_price" class="block text-sm font-medium text-gray-700 mb-2">Sale Price</label>
+                                    <label for="sale_price" class="block text-sm font-medium text-gray-700 mb-2">Harga Diskon</label>
                                     <div class="relative">
                                         <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">Rp</span>
                                         <input type="number" 
@@ -134,7 +130,7 @@
                     <!-- Inventory -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Inventory</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Stok</h3>
                         </div>
                         <div class="p-6">
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -151,7 +147,7 @@
                                 </div>
 
                                 <div>
-                                    <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-2">Stock Quantity</label>
+                                    <label for="stock_quantity" class="block text-sm font-medium text-gray-700 mb-2">Jumlah Stok</label>
                                     <input type="number" 
                                            id="stock_quantity" 
                                            name="stock_quantity" 
@@ -163,16 +159,14 @@
                                 </div>
 
                                 <div>
-                                    <label for="stock_status" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Stock Status <span class="text-red-500">*</span>
-                                    </label>
+                                    <label for="stock_status" class="block text-sm font-medium text-gray-700 mb-2">Status Stok <span class="text-red-500">*</span></label>
                                     <select id="stock_status" 
                                             name="stock_status" 
                                             required
                                             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('stock_status') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
-                                        <option value="in_stock" {{ old('stock_status', $product->stock_status) == 'in_stock' ? 'selected' : '' }}>In Stock</option>
-                                        <option value="out_of_stock" {{ old('stock_status', $product->stock_status) == 'out_of_stock' ? 'selected' : '' }}>Out of Stock</option>
-                                        <option value="on_backorder" {{ old('stock_status', $product->stock_status) == 'on_backorder' ? 'selected' : '' }}>On Backorder</option>
+                                        <option value="in_stock" {{ old('stock_status', $product->stock_status) == 'in_stock' ? 'selected' : '' }}>Tersedia</option>
+                                        <option value="out_of_stock" {{ old('stock_status', $product->stock_status) == 'out_of_stock' ? 'selected' : '' }}>Habis</option>
+                                        <option value="on_backorder" {{ old('stock_status', $product->stock_status) == 'on_backorder' ? 'selected' : '' }}>Pre-Order</option>
                                     </select>
                                     @error('stock_status')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -185,12 +179,12 @@
                     <!-- Shipping -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Shipping</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Pengiriman</h3>
                         </div>
                         <div class="p-6">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+                                    <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Berat (kg)</label>
                                     <input type="number" 
                                            step="0.01" 
                                            id="weight" 
@@ -203,12 +197,12 @@
                                 </div>
 
                                 <div>
-                                    <label for="dimensions" class="block text-sm font-medium text-gray-700 mb-2">Dimensions (L x W x H)</label>
+                                    <label for="dimensions" class="block text-sm font-medium text-gray-700 mb-2">Dimensi (P x L x T)</label>
                                     <input type="text" 
                                            id="dimensions" 
                                            name="dimensions" 
                                            value="{{ old('dimensions', $product->dimensions) }}"
-                                           placeholder="e.g., 10 x 5 x 3 cm"
+                                           placeholder="cth: 10 x 5 x 3 cm"
                                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('dimensions') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
                                     @error('dimensions')
                                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
@@ -225,30 +219,30 @@
                         </div>
                         <div class="p-6 space-y-6">
                             <div>
-                                <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Meta Title</label>
+                                <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Judul SEO</label>
                                 <input type="text" 
                                        id="meta_title" 
                                        name="meta_title" 
                                        value="{{ old('meta_title', $product->meta_title) }}"
                                        maxlength="60"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_title') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_title') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror" placeholder="Judul SEO untuk mesin pencari">
                                 @error('meta_title')
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
-                                <p class="mt-1 text-sm text-gray-500">Recommended: 50-60 characters</p>
+                                <p class="mt-1 text-sm text-gray-500">Disarankan: 50-60 karakter</p>
                             </div>
 
                             <div>
-                                <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                                <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi SEO</label>
                                 <textarea id="meta_description" 
                                           name="meta_description" 
                                           rows="3"
                                           maxlength="160"
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror">{{ old('meta_description', $product->meta_description) }}</textarea>
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 @error('meta_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror" placeholder="Deskripsi SEO untuk mesin pencari">{{ old('meta_description', $product->meta_description) }}</textarea>
                                 @error('meta_description')
                                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
-                                <p class="mt-1 text-sm text-gray-500">Recommended: 150-160 characters</p>
+                                <p class="mt-1 text-sm text-gray-500">Disarankan: 150-160 karakter</p>
                             </div>
                         </div>
                     </div>
@@ -259,11 +253,11 @@
                     <!-- Product Status -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Product Status</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Status Produk</h3>
                         </div>
                         <div class="p-6 space-y-4">
                             <div class="flex items-center justify-between">
-                                <label for="is_active" class="text-sm font-medium text-gray-700">Active</label>
+                                <label for="is_active" class="text-sm font-medium text-gray-700">Aktif</label>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" 
                                            id="is_active" 
@@ -276,7 +270,7 @@
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <label for="is_featured" class="text-sm font-medium text-gray-700">Featured</label>
+                                <label for="is_featured" class="text-sm font-medium text-gray-700">Unggulan</label>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="checkbox" 
                                            id="is_featured" 
@@ -294,7 +288,7 @@
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
                             <h3 class="text-lg font-semibold text-gray-900">
-                                Categories <span class="text-red-500">*</span>
+                                Kategori <span class="text-red-500">*</span>
                             </h3>
                         </div>
                         <div class="p-6">
@@ -332,7 +326,7 @@
                     <!-- Main Image -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Main Image</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Gambar Utama</h3>
                         </div>
                         <div class="p-6">
                             @if($product->image)
@@ -345,7 +339,7 @@
                             @endif
 
                             <div>
-                                <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Upload New Image</label>
+                                <label for="image" class="block text-sm font-medium text-gray-700 mb-2">Unggah Gambar Baru</label>
                                 <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors duration-200">
                                     <div class="space-y-1 text-center">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -358,7 +352,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                        <p class="text-xs text-gray-500">PNG, JPG, GIF maksimal 10MB</p>
                                     </div>
                                 </div>
                                 @error('image')
@@ -375,7 +369,7 @@
                     <!-- Additional Images -->
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
                         <div class="px-6 py-4 border-b border-gray-200">
-                            <h3 class="text-lg font-semibold text-gray-900">Additional Images</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Gambar Tambahan</h3>
                         </div>
                         <div class="p-6">
                             @if($product->images && count($product->images) > 0)
@@ -392,7 +386,7 @@
                             @endif
 
                             <div>
-                                <label for="additional_images" class="block text-sm font-medium text-gray-700 mb-2">Upload New Additional Images</label>
+                                <label for="additional_images" class="block text-sm font-medium text-gray-700 mb-2">Unggah Gambar Tambahan Baru</label>
                                 <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-gray-400 transition-colors duration-200">
                                     <div class="space-y-1 text-center">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -405,7 +399,7 @@
                                             </label>
                                             <p class="pl-1">or drag and drop</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">Multiple PNG, JPG, GIF files</p>
+                                        <p class="text-xs text-gray-500">Bisa memilih beberapa gambar sekaligus.</p>
                                     </div>
                                 </div>
                                 @error('additional_images.*')
@@ -426,92 +420,29 @@
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
-                    Cancel
+                    Batal
                 </a>
                 <button type="submit" 
                         class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
-                    Update Product
+                    Perbarui Produk
                 </button>
             </div>
         </form>
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Auto-generate slug from name
-    const nameInput = document.getElementById('name');
-    const slugInput = document.getElementById('slug');
-    
-    nameInput.addEventListener('input', function() {
-        if (!slugInput.value || slugInput.value === slugify(nameInput.dataset.originalValue || '')) {
-            slugInput.value = slugify(this.value);
-        }
-    });
-    
-    // Store original name value
-    nameInput.dataset.originalValue = nameInput.value;
-    
-    function slugify(text) {
-        return text.toString().toLowerCase()
-            .replace(/\s+/g, '-')
-            .replace(/[^\w\-]+/g, '')
-            .replace(/\-\-+/g, '-')
-            .replace(/^-+/, '')
-            .replace(/-+$/, '');
-    }
-    
-    // Main image preview
-    const imageInput = document.getElementById('image');
-    const imagePreview = document.getElementById('image-preview');
-    const previewImg = document.getElementById('preview-img');
-    
-    imageInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImg.src = e.target.result;
-                imagePreview.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.classList.add('hidden');
-        }
-    });
-    
-    // Additional images preview
-    const additionalImagesInput = document.getElementById('additional_images');
-    const additionalImagesPreview = document.getElementById('additional-images-preview');
-    
-    additionalImagesInput.addEventListener('change', function(e) {
-        additionalImagesPreview.innerHTML = '';
-        
-        if (e.target.files.length > 0) {
-            const previewContainer = document.createElement('div');
-            previewContainer.className = 'grid grid-cols-2 gap-3';
-            
-            Array.from(e.target.files).forEach((file, index) => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.className = 'w-full h-24 object-cover rounded-lg border border-gray-200';
-                        img.alt = `Preview ${index + 1}`;
-                        
-                        previewContainer.appendChild(img);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            additionalImagesPreview.appendChild(previewContainer);
-        }
-    });
-});
-</script>
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script>
+        var descriptionQuill = new Quill('#description-editor', { theme: 'snow' });
+        descriptionQuill.root.innerHTML = document.getElementById('description').value;
+        document.getElementById('description-editor').closest('form').addEventListener('submit', function() {
+            document.getElementById('description').value = descriptionQuill.root.innerHTML;
+        });
+    </script>
+@endpush
 @endsection

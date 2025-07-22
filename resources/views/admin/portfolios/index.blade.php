@@ -91,7 +91,7 @@
                                 </div>
                                 @if($portfolio->description)
                                     <div class="text-sm text-gray-500 max-w-xs truncate">
-                                        {{ Str::limit($portfolio->description, 50) }}
+                                        {{ Str::limit(strip_tags($portfolio->description), 50) }}
                                     </div>
                                 @endif
                             </td>

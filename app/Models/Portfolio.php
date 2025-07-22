@@ -19,7 +19,9 @@ class Portfolio extends Model
         'project_url',
         'technologies',
         'status',
-        'featured'
+        'featured',
+        'meta_title',
+        'meta_description',
     ];
 
     protected $casts = [

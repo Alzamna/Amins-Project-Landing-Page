@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Products')
+@section('title', 'Produk')
 
 @section('content')
 <div class="min-h-screen bg-gray-50 py-8">
@@ -9,8 +9,8 @@
         <div class="mb-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h1 class="text-3xl font-bold text-gray-900">Products</h1>
-                    <p class="mt-2 text-sm text-gray-600">Manage your product inventory and details</p>
+                    <h1 class="text-3xl font-bold text-gray-900">Produk</h1>
+                    <p class="mt-2 text-sm text-gray-600">Kelola daftar produk dan inventaris Anda</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
                     <a href="{{ route('admin.products.create') }}"
@@ -18,7 +18,7 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
-                        Add New Product
+                        Tambah Produk Baru
                     </a>
                 </div>
             </div>
@@ -47,12 +47,12 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categories</th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produk</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kategori</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
+                            <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stok</th>
                             <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                            <th class="px-6 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            <th class="px-6 py-4 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -127,11 +127,11 @@
                                 <td class="px-6 py-4">
                                     <div class="flex flex-col space-y-1">
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $product->is_active ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800' }}">
-                                            {{ $product->is_active ? 'Active' : 'Inactive' }}
+                                            {{ $product->is_active ? 'Aktif' : 'Tidak Aktif' }}
                                         </span>
                                         @if($product->is_featured)
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                                Featured
+                                                Diperjualbelikan
                                             </span>
                                         @endif
                                     </div>
@@ -141,7 +141,7 @@
                                     <div class="flex items-center justify-end space-x-2">
                                         <a href="{{ route('admin.products.show', $product) }}"
                                            class="inline-flex items-center p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-150"
-                                           title="View">
+                                           title="Lihat">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -157,12 +157,12 @@
                                         <form action="{{ route('admin.products.destroy', $product) }}"
                                               method="POST"
                                                class="inline-block"
-                                              onsubmit="return confirm('Are you sure you want to delete this product?')">
+                                              onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
                                                      class="inline-flex items-center p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors duration-150"
-                                                    title="Delete">
+                                                    title="Hapus">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                 </svg>
@@ -178,14 +178,14 @@
                                         <svg class="w-16 h-16 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                                         </svg>
-                                        <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
-                                        <p class="text-gray-500 mb-6">Start by creating your first product to manage your inventory.</p>
+                                        <h3 class="text-lg font-medium text-gray-900 mb-2">Produk tidak ditemukan</h3>
+                                        <p class="text-gray-500 mb-6">Mulai dengan membuat produk pertama Anda untuk mengelola inventaris.</p>
                                         <a href="{{ route('admin.products.create') }}"
                                             class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors duration-200">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                             </svg>
-                                            Add New Product
+                                            Tambah Produk Baru
                                         </a>
                                     </div>
                                 </td>

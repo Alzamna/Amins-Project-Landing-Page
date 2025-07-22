@@ -22,45 +22,35 @@
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <!-- Main Content -->
-                    <div class="lg:col-span-2 space-y-6">
+                    <div class="lg:col-span-2 space-y-8">
                         <!-- Title -->
                         <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Judul *</label>
                             <input type="text" 
                                    id="title" 
                                    name="title" 
                                    value="{{ old('title') }}"
                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('title') border-red-500 @enderror"
-                                   placeholder="Enter blog post title"
+                                   placeholder="Masukkan judul blog"
                                    required>
                             @error('title')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-
-                        <!-- Excerpt -->
-                        <div>
-                            <label for="excerpt" class="block text-sm font-medium text-gray-700 mb-2">Excerpt *</label>
-                            <textarea id="excerpt" 
-                                      name="excerpt" 
-                                      rows="3"
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('excerpt') border-red-500 @enderror"
-                                      placeholder="Brief description of the blog post"
-                                      required>{{ old('excerpt') }}</textarea>
+                        <!-- Excerpt (Section) -->
+                        <div class="bg-white rounded-lg p-4 mb-2">
+                            <label for="excerpt" class="block text-base font-semibold text-gray-800 mb-2">Ringkasan *</label>
+                            <div id="excerpt-editor" style="min-height:100px;">{{ old('excerpt') }}</div>
+                            <textarea name="excerpt" id="excerpt" class="hidden">{{ old('excerpt') }}</textarea>
                             @error('excerpt')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
                         </div>
-
-                        <!-- Content -->
-                        <div>
-                            <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Content *</label>
-                            <textarea id="content" 
-                                      name="content" 
-                                      rows="15"
-                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('content') border-red-500 @enderror"
-                                      placeholder="Write your blog post content here..."
-                                      required>{{ old('content') }}</textarea>
+                        <!-- Content (Section) -->
+                        <div class="bg-white rounded-lg p-4">
+                            <label for="content" class="block text-base font-semibold text-gray-800 mb-2">Konten *</label>
+                            <div id="content-editor" style="min-height:200px;">{{ old('content') }}</div>
+                            <textarea name="content" id="content" class="hidden">{{ old('content') }}</textarea>
                             @error('content')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
@@ -160,6 +150,34 @@
                     </div>
                 </div>
 
+                <!-- SEO -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mt-8">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">SEO</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-2">Judul SEO</label>
+                            <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title') }}"
+                                maxlength="60"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('meta_title') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+                                placeholder="Judul SEO untuk mesin pencari">
+                            @error('meta_title')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-sm text-gray-500">Disarankan: 50-60 karakter</p>
+                        </div>
+                        <div>
+                            <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi SEO</label>
+                            <textarea id="meta_description" name="meta_description" rows="3" maxlength="160"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('meta_description') border-red-500 focus:ring-red-500 focus:border-red-500 @enderror"
+                                placeholder="Deskripsi SEO untuk mesin pencari">{{ old('meta_description') }}</textarea>
+                            @error('meta_description')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-sm text-gray-500">Disarankan: 150-160 karakter</p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Submit Buttons -->
                 <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                     <a href="{{ route('admin.blog-posts.index') }}" 
@@ -176,3 +194,20 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <script>
+        var excerptQuill = new Quill('#excerpt-editor', { theme: 'snow' });
+        var contentQuill = new Quill('#content-editor', { theme: 'snow' });
+        // Set initial value from textarea (for edit form)
+        excerptQuill.root.innerHTML = document.getElementById('excerpt').value;
+        contentQuill.root.innerHTML = document.getElementById('content').value;
+        // On submit, update textarea with Quill HTML
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('excerpt').value = excerptQuill.root.innerHTML;
+            document.getElementById('content').value = contentQuill.root.innerHTML;
+        });
+    </script>
+@endpush

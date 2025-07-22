@@ -25,6 +25,8 @@ class BlogPost extends Model
         'views_count',
         'comments_count',
         'published_at',
+        'meta_title',
+        'meta_description',
     ];
 
     protected $casts = [

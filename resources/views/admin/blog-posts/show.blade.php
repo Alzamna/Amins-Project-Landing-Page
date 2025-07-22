@@ -145,7 +145,7 @@
         <div class="px-8 py-6 bg-blue-50 border-b border-gray-200">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Excerpt</h3>
             <p class="text-gray-700 leading-relaxed text-lg">
-                {{ $blogPost->excerpt }}
+                {!! $blogPost->excerpt !!}
             </p>
         </div>
 

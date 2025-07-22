@@ -164,7 +164,7 @@
                                     <div class="flex-grow">
                                         <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
                                             <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg h-14">{{ $product->name }}</h3>
-                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed h-20">{{ Str::limit($product->description, 100) }}</p>
+                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed h-20">{{ Str::limit(strip_tags($product->description), 100) }}</p>
                                         </a>
                                     </div>
                                     
@@ -270,7 +270,7 @@
                                     <div class="flex-grow">
                                         <a href="{{ route('shop.product', $product->slug) }}" class="block group-hover:text-blue-600 transition-colors">
                                             <h3 class="font-bold text-gray-900 mb-2 line-clamp-2 text-lg h-14">{{ $product->name }}</h3>
-                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">{{ Str::limit($product->description, 100) }}</p>
+                                            <p class="text-gray-600 text-sm mb-4 line-clamp-3 leading-relaxed">{{ Str::limit(strip_tags($product->description), 100) }}</p>
                                         </a>
                                     </div>
                                     
