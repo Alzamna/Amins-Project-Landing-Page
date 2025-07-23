@@ -199,15 +199,26 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <script>
-        var excerptQuill = new Quill('#excerpt-editor', { theme: 'snow' });
-        var contentQuill = new Quill('#content-editor', { theme: 'snow' });
-        // Set initial value from textarea (for edit form)
-        excerptQuill.root.innerHTML = document.getElementById('excerpt').value;
-        contentQuill.root.innerHTML = document.getElementById('content').value;
-        // On submit, update textarea with Quill HTML
-        document.querySelector('form').addEventListener('submit', function() {
-            document.getElementById('excerpt').value = excerptQuill.root.innerHTML;
-            document.getElementById('content').value = contentQuill.root.innerHTML;
+        document.addEventListener('DOMContentLoaded', function() {
+            var excerptQuill = new Quill('#excerpt-editor', { theme: 'snow' });
+            var contentQuill = new Quill('#content-editor', { theme: 'snow' });
+
+            // Set initial value from textarea (for edit form)
+            var excerptTextarea = document.getElementById('excerpt');
+            var contentTextarea = document.getElementById('content');
+            if (excerptTextarea && excerptTextarea.value) {
+                excerptQuill.root.innerHTML = excerptTextarea.value;
+            }
+            if (contentTextarea && contentTextarea.value) {
+                contentQuill.root.innerHTML = contentTextarea.value;
+            }
+
+            // On submit, update textarea with Quill HTML
+            var form = excerptTextarea.closest('form');
+            form.addEventListener('submit', function() {
+                excerptTextarea.value = excerptQuill.root.innerHTML;
+                contentTextarea.value = contentQuill.root.innerHTML;
+            });
         });
     </script>
 @endpush

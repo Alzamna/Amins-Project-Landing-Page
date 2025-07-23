@@ -152,9 +152,9 @@
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($relatedPosts as $relatedPost)
-                    <article class="group cursor-pointer">
-                        <a href="{{ route('blog.show', $relatedPost->slug) }}" class="block">
-                            <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <article class="group cursor-pointer h-full flex flex-col">
+                        <a href="{{ route('blog.show', $relatedPost->slug) }}" class="block h-full">
+                            <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full flex flex-col">
                                 <div class="relative overflow-hidden h-48">
                                     <img src="{{ $relatedPost->featured_image_url }}" 
                                          alt="{{ $relatedPost->title }}" 
@@ -166,15 +166,13 @@
                                     </div>
                                 </div>
                                 
-                                <div class="p-6">
+                                <div class="p-6 flex-1 flex flex-col">
                                     <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
                                         {{ $relatedPost->title }}
                                     </h3>
-                                    
-                                    <p class="text-gray-600 leading-relaxed mb-4 line-clamp-3">
-                                        {{ $relatedPost->excerpt_limited }}
+                                    <p class="text-gray-600 leading-relaxed mb-4 line-clamp-3 flex-1 min-h-[60px]">
+                                        {{ Str::limit(strip_tags($relatedPost->excerpt), 120) }}
                                     </p>
-                                    
                                     <div class="flex items-center justify-between text-sm text-gray-500">
                                         <span>{{ $relatedPost->formatted_date }}</span>
                                         <span>{{ $relatedPost->reading_time }} min</span>
@@ -193,6 +191,8 @@
 @endsection
 
 @push('styles')
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
 <style>
     .line-clamp-2 {
         display: -webkit-box;
@@ -250,4 +250,4 @@
         color: #6b7280;
     }
 </style>
-@endpush
+

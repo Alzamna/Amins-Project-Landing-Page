@@ -31,7 +31,7 @@
     </div>
 
     <!-- Form -->
-    <form method="POST" action="{{ route('admin.blog-posts.update', $blogPost) }}" enctype="multipart/form-data" class="space-y-8">
+    <form id="blog-edit-form" method="POST" action="{{ route('admin.blog-posts.update', $blogPost) }}" enctype="multipart/form-data" class="space-y-8">
         @csrf
         @method('PUT')
 
@@ -255,11 +255,11 @@
     <script>
         var excerptQuill = new Quill('#excerpt-editor', { theme: 'snow' });
         var contentQuill = new Quill('#content-editor', { theme: 'snow' });
-        // Set initial value from textarea (for edit form)
+        // Set initial value from textarea (lebih aman ambil dari textarea.value, bukan innerHTML div)
         excerptQuill.root.innerHTML = document.getElementById('excerpt').value;
         contentQuill.root.innerHTML = document.getElementById('content').value;
-        // On submit, update textarea with Quill HTML
-        document.querySelector('form').addEventListener('submit', function() {
+        // Pastikan update value textarea pada submit
+        document.getElementById('blog-edit-form').addEventListener('submit', function(e) {
             document.getElementById('excerpt').value = excerptQuill.root.innerHTML;
             document.getElementById('content').value = contentQuill.root.innerHTML;
         });

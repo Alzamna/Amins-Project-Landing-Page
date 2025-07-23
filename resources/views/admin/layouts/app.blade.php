@@ -6,6 +6,7 @@
     <title>@hasSection('title')@yield('title') – @endif{{ config('title', 'Admin Panel') }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-a.png') }}">
     <script>
         tailwind.config = {
             theme: {

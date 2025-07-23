@@ -10,6 +10,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-a.png') }}">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -69,5 +72,31 @@
             }
         });
     </script>
+    @push('scripts')
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var excerptQuill = new Quill('#excerpt-editor', { theme: 'snow' });
+            var contentQuill = new Quill('#content-editor', { theme: 'snow' });
+
+            // Set initial value from textarea (for edit form)
+            var excerptTextarea = document.getElementById('excerpt');
+            var contentTextarea = document.getElementById('content');
+            if (excerptTextarea && excerptTextarea.value) {
+                excerptQuill.root.innerHTML = excerptTextarea.value;
+            }
+            if (contentTextarea && contentTextarea.value) {
+                contentQuill.root.innerHTML = contentTextarea.value;
+            }
+
+            // On submit, update textarea with Quill HTML
+            var form = excerptTextarea.closest('form');
+            form.addEventListener('submit', function() {
+                excerptTextarea.value = excerptQuill.root.innerHTML;
+                contentTextarea.value = contentQuill.root.innerHTML;
+            });
+        });
+    </script>
+@endpush
 </body>
 </html>

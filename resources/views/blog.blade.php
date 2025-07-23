@@ -103,9 +103,9 @@
         <!-- Blog Grid -->
         <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             @forelse($posts as $post)
-                <article class="blog-card group cursor-pointer" data-category="{{ strtolower($post->category) }}">
-                    <a href="{{ route('blog.show', $post->slug) }}" class="block">
-                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
+                <article class="blog-card group cursor-pointer h-full" data-category="{{ strtolower($post->category) }}">
+                    <a href="{{ route('blog.show', $post->slug) }}" class="block h-full">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 flex flex-col h-full">
                             <div class="relative overflow-hidden">
                                 <div class="relative h-64">
                                     <img src="{{ $post->featured_image_url }}" 
@@ -136,7 +136,7 @@
                                 </div>
                             </div>
                             
-                            <div class="p-6">
+                            <div class="p-6 flex flex-col flex-1">
                                 <div class="flex items-center space-x-4 mb-4 text-sm text-gray-500">
                                     <div class="flex items-center space-x-1">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -158,11 +158,11 @@
                                     </div>
                                 </div>
                                 
-                                <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
-                                    {!! $post->excerpt !!}
+                                <p class="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300 flex-1 min-h-[60px]">
+                                    {{ Str::limit(strip_tags($post->excerpt), 120) }}
                                 </p>
 
-                                <div class="mt-3 pt-3 border-t border-gray-100">
+                                <div class="mt-3 pt-3 border-t border-gray-100 mt-auto">
                                                 <span class="text-blue-600 font-semibold text-sm group-hover:text-blue-700 transition-colors duration-300 inline-flex items-center">
                                                     Baca Selengkapnya
                                                     <svg class="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
